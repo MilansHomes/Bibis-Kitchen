@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BiBi’s Kitchen | Vancouver</title>
+  <meta name="description" content="BiBi’s Kitchen in Vancouver — eat fresh feel fresh. Order online via Uber Eats, DoorDash, or SkipTheDishes." />
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --panel:rgba(17,24,42,.78);
+      --text:#eef2ff;
+      --muted:#b8c0d9;
+      --border:rgba(255,255,255,.12);
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+
+      /* Brand accent (your logo green) */
+      --accent:#5F7D2C;
+      --accent2: rgba(95,125,44,.22);
+
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, var(--accent2), transparent 62%),
+        radial-gradient(900px 600px at 95% 0%, rgba(167,139,250,.16), transparent 55%),
+        var(--bg);
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none}
+    a:hover{opacity:.92}
+    .wrap{max-width:1120px;margin:0 auto;padding:18px}
+
+    /* Header */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(11,15,25,.78);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .navrow{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;flex-wrap:wrap;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:900;letter-spacing:.2px;
+    }
+    .logo{
+      width:42px;height:42px;border-radius:999px;
+      border:2px solid rgba(95,125,44,.85);
+      background: radial-gradient(circle at 30% 30%, rgba(95,125,44,.35), rgba(0,0,0,.2));
+      display:grid;place-items:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    /* Replace the BK text with your real logo:
+       Put your logo at /assets/logo.png then uncomment the <img> in the HTML. */
+    .logo span{
+      font-size:14px;
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      letter-spacing:.6px;
+    }
+
+    .navlinks{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .navlinks a{
+      color:var(--muted);
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .navlinks a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      border-color:rgba(255,255,255,.08);
+    }
+    .navlinks a.active{
+      color:var(--text);
+      border-color:rgba(95,125,44,.65);
+      background:rgba(95,125,44,.14);
+    }
+
+    .rightbits{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 11px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .pill strong{color:var(--text);font-weight:800}
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background:var(--accent);
+      box-shadow: 0 0 0 4px rgba(95,125,44,.18);
+    }
+
+    /* Sections */
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+    }
+    section{scroll-margin-top:92px}
+
+    /* Hero */
+    .hero{
+      margin-top:14px;
+      overflow:hidden;
+      position:relative;
+      min-height: 420px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .hero::before{
+      content:"";
+      position:absolute;inset:0;
+      /* Replace this with your hero image:
+         - Put image at /assets/hero.jpg
+         - Change background-image below to: url('assets/hero.jpg')
+      */
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65)),
+        radial-gradient(800px 500px at 20% 10%, rgba(95,125,44,.20), transparent 60%),
+        radial-gradient(900px 600px at 95% 0%, rgba(167,139,250,.14), transparent 58%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.1);
+    }
+    .heroInner{
+      position:relative;
+      padding:34px 22px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:46px;line-height:1.06;
+      letter-spacing:-.4px;
+    }
+    .motto{
+      margin:0 0 16px;
+      color:rgba(255,255,255,.82);
+      max-width:60ch;
+      font-size:16px;
+    }
+    .ctaRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:900;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      background: var(--accent);
+      color:#0b0f19;
+      border-color: rgba(0,0,0,.12);
+      box-shadow: 0 10px 28px rgba(95,125,44,.22);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .heroInfo{
+      padding:16px;
+      border-radius:var(--radius2);
+      background:rgba(11,15,25,.55);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .heroInfo p{margin:0 0 10px;color:var(--muted)}
+    .heroInfo .big{color:var(--text);font-weight:900}
+    .heroInfo .small{font-size:13px}
+
+    /* Content blocks */
+    .block{padding:18px;margin-top:14px}
+    .block h2{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    .accentLine{
+      width:56px;height:4px;border-radius:999px;
+      background:var(--accent);
+      margin:10px 0 14px;
+    }
+    .muted{color:var(--muted)}
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .mapBox{
+      overflow:hidden;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+    }
+    iframe{width:100%;height:320px;border:0}
+    .hoursGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    .hoursCard{
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      padding:14px;
+    }
+    .row{
+      display:flex;justify-content:space-between;gap:10px;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      color:var(--muted);
+    }
+    .row:last-child{border-bottom:none}
+    .row strong{color:var(--text)}
+    .note{
+      margin-top:10px;
+      font-size:13px;
+      color:rgba(255,255,255,.70);
+    }
+
+    /* Order Online */
+    .iconGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .iconBtn{
+      display:flex;align-items:center;gap:12px;
+      padding:14px;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .iconBtn:hover{
+      transform:translateY(-2px);
+      border-color: rgba(95,125,44,.55);
+      background:rgba(95,125,44,.10);
+    }
+    .iconMark{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .iconMark span{
+      font-weight:1000;
+      letter-spacing:.5px;
+      color:rgba(255,255,255,.90);
+      font-size:13px;
+    }
+    .iconBtn .title{font-weight:950;margin:0}
+    .iconBtn .sub{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+    /* Menu */
+    .category{
+      margin-top:18px;
+      padding-top:6px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .category:first-of-type{border-top:none;margin-top:6px}
+    .catTitle{
+      text-align:center;
+      font-weight:1000;
+      letter-spacing:1.2px;
+      color:rgba(95,125,44,.95);
+      margin:12px 0 14px;
+      font-size:20px;
+    }
+    .menuGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
+    }
+    .item{
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      overflow:hidden;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .item:hover{
+      transform:translateY(-2px);
+      border-color: rgba(95,125,44,.45);
+    }
+    .thumb{
+      aspect-ratio: 4/3;
+      width:100%;
+      background:
+        radial-gradient(800px 400px at 30% 10%, rgba(95,125,44,.18), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:grid;place-items:center;
+      color:rgba(255,255,255,.65);
+      font-weight:900;
+      letter-spacing:.4px;
+      position:relative;
+    }
+    /* If you add real images, use <img class="thumbImg" ...> */
+    .thumbImg{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .itemBody{padding:12px}
+    .nameRow{
+      display:flex;justify-content:space-between;gap:10px;
+      align-items:flex-start;
+    }
+    .itemName{
+      margin:0;
+      font-weight:1000;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:14px;
+      line-height:1.2;
+    }
+    .price{
+      margin:0;
+      color:rgba(255,255,255,.86);
+      font-weight:1000;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .desc{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Footer */
+    .footer{
+      margin-top:16px;
+      padding:18px;
+    }
+    .footRow{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;flex-wrap:wrap;
+    }
+    .socials{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .sIcon{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      display:grid;place-items:center;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .sIcon:hover{
+      transform:translateY(-2px);
+      border-color: rgba(95,125,44,.55);
+      background:rgba(95,125,44,.10);
+    }
+    .sIcon svg{width:20px;height:20px;opacity:.92}
+    .tiny{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroInner{grid-template-columns:1fr}
+      .menuGrid{grid-template-columns:1fr}
+      .iconGrid{grid-template-columns:1fr}
+      .twoCol{grid-template-columns:1fr}
+      .hoursGrid{grid-template-columns:1fr}
+      .hero{min-height:auto}
+      .hero h1{font-size:36px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="wrap navrow">
+      <a class="brand" href="#home" aria-label="BiBi's Kitchen home">
+        <div class="logo" aria-hidden="true">
+          <!-- If you have your logo file, use this instead:
+          <img src="assets/logo.png" alt="BiBi’s Kitchen logo" style="width:100%;height:100%;object-fit:cover;">
+          -->
+          <span>BK</span>
+        </div>
+        <span>BiBi’s Kitchen</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Primary navigation">
+        <a href="#home" data-section="home" class="active">Home</a>
+        <a href="#order" data-section="order">Order online</a>
+        <a href="#menu" data-section="menu">Menu</a>
+      </nav>
+
+      <div class="rightbits">
+        <span class="pill"><span class="dot" aria-hidden="true"></span><strong>Open</strong> 7:00am–8:30pm</span>
+        <a class="pill" href="tel:16045659898" aria-label="Call BiBi's Kitchen">
+          <strong>Call</strong> 604-565-9898
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section id="home" aria-label="Home">
+      <div class="hero" role="region" aria-label="Welcome banner">
+        <div class="heroInner">
+          <div>
+            <h1>Welcome to BiBi’s Kitchen</h1>
+            <p class="motto">eat fresh feel fresh</p>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="#order">Order Online</a>
+              <a class="btn" href="#menu">Menu</a>
+            </div>
+          </div>
+
+          <aside class="heroInfo">
+            <p class="big">418 Terminal Avenue</p>
+            <p>Vancouver, British Columbia V6A 0C1, Canada</p>
+            <p class="small"><span class="muted">Phone:</span> <a href="tel:16045659898"><strong>604-565-9898</strong></a></p>
+            <p class="small muted" style="margin-top:10px;">Tip: replace the hero background with your own food photo at <strong>assets/hero.jpg</strong>.</p>
+          </aside>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="card block" aria-label="About us">
+        <h2>About Us</h2>
+        <div class="accentLine" aria-hidden="true"></div>
+        <p class="muted" style="margin:0;">
+          At Bibi's Kitchen, we don't just serve food; we craft experiences that tell the story of India's rich culinary heritage.
+          Our journey began with a simple vision: to bring the vibrant flavors and authentic tastes of Indian fast food to discerning palates all around.
+        </p>
+      </div>
+
+      <!-- Visit + Hours -->
+      <div class="twoCol" style="margin-top:14px;">
+        <div class="card block" id="visit" aria-label="Visit us">
+          <h2>Visit Us</h2>
+          <div class="accentLine" aria-hidden="true"></div>
+          <p class="muted" style="margin:0 0 12px;">
+            <strong style="color:var(--text)">418 Terminal Avenue, Vancouver, BC V6A 0C1</strong>
+          </p>
+          <div class="mapBox" aria-label="Google map">
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=418+Terminal+Avenue+Vancouver+BC&output=embed"
+              title="Map to BiBi's Kitchen">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="card block" aria-label="Hours">
+          <h2>Hours</h2>
+          <div class="accentLine" aria-hidden="true"></div>
+
+          <div class="hoursCard">
+            <div class="row"><strong>Monday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Tuesday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Wednesday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Thursday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Friday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Saturday</strong><span>7 a.m. – 8:30 p.m.</span></div>
+            <div class="row"><strong>Sunday</strong><span>9 a.m. – 5 p.m.</span></div>
+            <div class="note">Note: Hours might differ on New Year’s Eve and New Year’s Day.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER ONLINE -->
+    <section id="order" class="card block" aria-label="Order online">
+      <h2>Order Online</h2>
+      <div class="accentLine" aria-hidden="true"></div>
+      <p class="muted" style="margin:0 0 10px;">Tap a service to order (opens in a new tab).</p>
+
+      <div class="iconGrid" role="list">
+        <a class="iconBtn" role="listitem" target="_blank" rel="noopener noreferrer"
+           href="https://www.ubereats.com/ca/store/bibis-kitchen/2pxbFLz9Tqm9RK9t9bSHPg?srsltid=AfmBOoqLX_Av8lKA1YZsxrpOBxGHizQEGQ_fjaxRqAv9QO92I2QcjJAE">
+          <div class="iconMark" aria-hidden="true"><span>UE</span></div>
+          <div>
+            <p class="title">Uber Eats</p>
+            <p class="sub">Delivery</p>
+          </div>
+        </a>
+
+        <a class="iconBtn" role="listitem" target="_blank" rel="noopener noreferrer"
+           href="https://www.doordash.com/store/bibi-s-kitchen-vancouver-93088/?srsltid=AfmBOoqs8FDpO-_cbVQxWEl3TQI-NJQMMka4sE44oNLL08pjDRui36cB">
+          <div class="iconMark" aria-hidden="true"><span>DD</span></div>
+          <div>
+            <p class="title">DoorDash</p>
+            <p class="sub">Delivery</p>
+          </div>
+        </a>
+
+        <a class="iconBtn" role="listitem" target="_blank" rel="noopener noreferrer"
+           href="https://www.skipthedishes.com/bibis-kitchen">
+          <div class="iconMark" aria-hidden="true"><span>SK</span></div>
+          <div>
+            <p class="title">SkipTheDishes</p>
+            <p class="sub">Delivery</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="card block" aria-label="Menu">
+      <h2>Menu</h2>
+      <div class="accentLine" aria-hidden="true"></div>
+      <p class="muted" style="margin:0 0 10px;">
+        This menu is laid out like your current site: categories + photo grid. Prices only appear when they were shown in your screenshots.
+      </p>
+
+      <!-- LUNCH -->
+      <div class="category" id="menu-lunch">
+        <div class="catTitle">LUNCH</div>
+        <div class="menuGrid">
+          <article class="item">
+            <div class="thumb">
+              <!-- Replace with a real image:
+              <img class="thumbImg" src="assets/menu/lunch/bibis-home-meal.jpg" alt="Bibi's Home Meal">
+              -->
+              Add photo
+            </div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Bibi’s Home Meal</h3>
+              </div>
+              <p class="desc">2 curry, rice, naan bread, side salad</p>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Paneer Tikka Wrap</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Kulcha Chole</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Samosa With Chana</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Tikki With Chana</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Veg Biryani</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Momos</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Manchurian</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Hakka Noodles</h3>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- APPETIZER -->
+      <div class="category" id="menu-appetizer">
+        <div class="catTitle">APPETIZER</div>
+        <div class="menuGrid">
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Patty</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bhel Puri</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Spring Roll</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chaat</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chat Papri</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Bhalle</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Batata Puri</h3></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Golgappe</h3></div></div></article>
+        </div>
+      </div>
+
+      <!-- PARANTHA -->
+      <div class="category" id="menu-parantha">
+        <div class="catTitle">PARANTHA</div>
+        <div class="menuGrid">
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow">
+                <h3 class="itemName">Parantha</h3>
+                <p class="price">8.5</p>
+              </div>
+              <p class="desc">Potato, Cauliflower, Paneer, Mooli, Methi</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- BURGERS -->
+      <div class="category" id="menu-burgers">
+        <div class="catTitle">BURGERS</div>
+        <div class="menuGrid">
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow"><h3 class="itemName">Veggie Burger</h3><p class="price">11</p></div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow"><h3 class="itemName">Noodle Burger</h3><p class="price">12</p></div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow"><h3 class="itemName">Grilled Onion Burger</h3><p class="price">12</p></div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow"><h3 class="itemName">Paneer Salad Burger</h3><p class="price">12</p></div>
+            </div>
+          </article>
+
+          <article class="item">
+            <div class="thumb">Add photo</div>
+            <div class="itemBody">
+              <div class="nameRow"><h3 class="itemName">Beyond Meat Burger</h3></div>
+              <p class="desc muted" style="margin-top:8px;">(No price shown in your screenshot, so none displayed.)</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- SANDWICH -->
+      <div class="category" id="menu-sandwich">
+        <div class="catTitle">SANDWICH</div>
+        <div class="menuGrid">
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Sandwich</h3><p class="price">8</p></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bombay Sandwich</h3><p class="price">8</p></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Sandwich</h3><p class="price">4.5</p></div></div></article>
+          <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Grilled Cheese Sandwich</h3><p class="price">4.5</p></div></div></article>
+        </div>
+      </div>
+
+      <p class="tiny" style="margin-top:14px;">
+        To add the real menu photos: create an <strong>assets/menu/</strong> folder in your repo and replace the “Add photo” blocks with actual <code>&lt;img&gt;</code> tags (examples are commented in the first item).
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="card footer" aria-label="Footer">
+      <div class="footRow">
+        <div class="muted">
+          <strong style="color:var(--text)">Phone:</strong>
+          <a href="tel:16045659898" style="margin-left:6px;"><strong>604-565-9898</strong></a>
+        </div>
+
+        <div class="socials" aria-label="Social media links">
+          <a class="sIcon" target="_blank" rel="noopener noreferrer"
+             href="https://www.instagram.com/bibiskitchen.ca/?hl=en" aria-label="Instagram">
+            <!-- camera icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="1"></circle>
+            </svg>
+          </a>
+
+          <a class="sIcon" target="_blank" rel="noopener noreferrer"
+             href="https://www.tiktok.com/@bibiskitchen24?lang=en" aria-label="TikTok">
+            <!-- simple music note -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+              <path d="M12 15V3c2 2 4 3 7 3v4c-3 0-5-1-7-3"></path>
+            </svg>
+          </a>
+
+          <a class="sIcon" target="_blank" rel="noopener noreferrer"
+             href="https://www.facebook.com/bibis.kitchen.7/" aria-label="Facebook">
+            <!-- f icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 8h3V5h-3c-2 0-4 2-4 4v3H7v3h3v6h3v-6h3l1-3h-4V9c0-.6.4-1 1-1z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="tiny">© <span id="year"></span> BiBi’s Kitchen</div>
+    </footer>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth scroll for same-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.pushState(null, "", id);
+      });
+    });
+
+    // Active nav highlight based on scroll
+    const navLinks = Array.from(document.querySelectorAll(".navlinks a[data-section]"));
+    const sections = navLinks.map(l => document.getElementById(l.dataset.section)).filter(Boolean);
+
+    const setActive = (id) => {
+      navLinks.forEach(a => a.classList.toggle("active", a.dataset.section === id));
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target?.id) setActive(visible.target.id);
+    }, { threshold: [0.25, 0.4, 0.55, 0.7] });
+
+    sections.forEach(s => io.observe(s));
+  </script>
+</body>
+</html>
