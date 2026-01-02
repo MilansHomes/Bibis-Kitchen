@@ -8,7 +8,7 @@
 
   <style>
     :root{
-      --accent:#5F7D2C;                 /* logo green */
+      --accent:#5F7D2C;
       --accentSoft: rgba(95,125,44,.22);
       --bg:#070a12;
       --bg2:#0b1020;
@@ -209,7 +209,7 @@
     .sIcon:hover{transform:translateY(-2px);border-color: rgba(95,125,44,.6);background: rgba(95,125,44,.12)}
     .sIcon svg{width:20px;height:20px;opacity:.92}
 
-    /* About section with slider on the right */
+    /* About section with slider on the right (desktop) */
     .aboutGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -217,15 +217,14 @@
       align-items:stretch;
       margin-top:14px;
     }
-    .aboutText{
-      padding:18px;
-    }
+    .aboutText{padding:18px}
     .aboutSliderWrap{
       padding:18px;
       display:flex;
       flex-direction:column;
       gap:12px;
     }
+
     .slider{
       position:relative;
       border-radius:var(--r2);
@@ -234,11 +233,10 @@
       overflow:hidden;
       flex:1;
       min-height: 260px;
+      touch-action: pan-y; /* allow vertical scroll, we handle horizontal swipe */
+      user-select: none;
     }
-    .slide{
-      position:absolute; inset:0;
-      display:none;
-    }
+    .slide{position:absolute; inset:0; display:none}
     .slide.active{display:block}
     .slideBox{
       width:100%;
@@ -256,7 +254,9 @@
       width:100%; height:100%;
       object-fit:cover;
       display:block;
+      pointer-events:none; /* keeps swipe smooth */
     }
+
     .sliderControls{
       display:flex;
       justify-content:space-between;
@@ -348,11 +348,10 @@
       font-size: 13px;
     }
 
-    /* Sticky 4-tab menu bar (one-line on mobile, scrolls sideways if needed) */
     .menuTabs{
       position: sticky;
       z-index: 30;
-      top: 72px; /* JS sets exact value */
+      top: 72px;
       margin-top: 12px;
       padding: 10px;
       border-radius: 16px;
@@ -437,7 +436,6 @@
     }
     .desc{margin:8px 0 0;color:var(--muted);font-size:13px}
 
-    /* Footer */
     .footer{
       margin-top:14px;
       padding:18px;
@@ -453,13 +451,13 @@
       .hero h1{font-size:36px}
       .hero{min-height:auto}
 
-      /* About grid stacks on phone */
+      /* About stacks, BUT slider goes ABOVE text on mobile */
       .aboutGrid{grid-template-columns:1fr}
+      .aboutSliderWrap{order:1}
+      .aboutText{order:2}
 
       /* iPhone / mobile = 2 columns */
-      .menuGrid{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .menuGrid{grid-template-columns: repeat(2, minmax(0, 1fr));}
 
       .tabBtn{font-size:12.5px;padding:9px 11px}
     }
@@ -513,6 +511,7 @@
 
       <!-- About + Slider -->
       <section class="aboutGrid">
+        <!-- Keep this order so on DESKTOP slider stays on the RIGHT -->
         <div class="card aboutText" aria-label="About us">
           <h2>About Us</h2>
           <div class="accentLine" aria-hidden="true"></div>
@@ -530,19 +529,16 @@
           <div class="accentLine" aria-hidden="true"></div>
 
           <div class="slider" id="aboutSlider">
-            <!-- SLIDE 1 -->
             <div class="slide active">
               <!-- Replace this placeholder with an actual image if you want:
                    <img src="images/slide1.jpg" alt="BiBi's Kitchen food" /> -->
               <div class="slideBox">Slide 1 (Add photo)</div>
             </div>
 
-            <!-- SLIDE 2 -->
             <div class="slide">
               <div class="slideBox">Slide 2 (Add photo)</div>
             </div>
 
-            <!-- SLIDE 3 -->
             <div class="slide">
               <div class="slideBox">Slide 3 (Add photo)</div>
             </div>
@@ -553,6 +549,10 @@
             <div class="dots" id="slideDots" aria-label="Slide dots"></div>
             <button class="sliderBtn" type="button" id="nextSlide">Next ▶</button>
           </div>
+
+          <p class="muted" style="margin:0;font-size:12.5px;text-align:center;">
+            On mobile: swipe left/right on the photo.
+          </p>
         </div>
       </section>
 
@@ -691,7 +691,6 @@
         <div class="accentLine" aria-hidden="true"></div>
         <p class="muted" style="margin:0;">Use the tabs to jump around instantly.</p>
 
-        <!-- Sticky 4 tabs -->
         <div class="menuTabs" id="menuTabs">
           <div class="tabRow" aria-label="Menu category tabs">
             <button class="tabBtn" type="button" data-jump="cat-appetizers">Appetizers</button>
@@ -701,7 +700,7 @@
           </div>
         </div>
 
-        <!-- APPETIZERS (includes chaat specials) -->
+        <!-- APPETIZERS -->
         <div class="category" id="cat-appetizers">
           <div class="catTitle">APPETIZERS</div>
           <p class="catNote">Includes Chaat Specials</p>
@@ -899,7 +898,6 @@
     }
     updateMenuTabsTop();
 
-    // Smooth scroll helper (accounts for header + menuTabs if present)
     function scrollToSection(id){
       const el = document.getElementById(id);
       if(!el) return;
@@ -926,7 +924,7 @@
       }
     });
 
-    // ===== About slider (Prev/Next + dots) =====
+    // ===== About slider (Prev/Next + dots + swipe) =====
     const slider = document.getElementById("aboutSlider");
     const slides = slider ? Array.from(slider.querySelectorAll(".slide")) : [];
     const prevBtn = document.getElementById("prevSlide");
@@ -954,17 +952,13 @@
       renderDots();
     }
 
-    function nextSlide(){
-      setSlide(currentSlide + 1);
-    }
-    function prevSlide(){
-      setSlide(currentSlide - 1);
-    }
+    function nextSlide(){ setSlide(currentSlide + 1); }
+    function prevSlide(){ setSlide(currentSlide - 1); }
 
     if(prevBtn) prevBtn.addEventListener("click", prevSlide);
     if(nextBtn) nextBtn.addEventListener("click", nextSlide);
 
-    // Optional: auto-rotate every 5s (feel free to delete these 2 lines if you don't want it)
+    // Auto-rotate (optional)
     let autoTimer = null;
     function startAuto(){
       if(!slides.length) return;
@@ -974,14 +968,49 @@
       if(autoTimer) clearInterval(autoTimer);
       autoTimer = null;
     }
+
+    // Swipe support (mobile)
     if(slider){
+      let startX = 0, startY = 0;
+      let deltaX = 0, deltaY = 0;
+      let tracking = false;
+
+      slider.addEventListener("touchstart", (e) => {
+        if(!e.touches || e.touches.length !== 1) return;
+        stopAuto();
+        tracking = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        deltaX = 0; deltaY = 0;
+      }, {passive:true});
+
+      slider.addEventListener("touchmove", (e) => {
+        if(!tracking || !e.touches || e.touches.length !== 1) return;
+        deltaX = e.touches[0].clientX - startX;
+        deltaY = e.touches[0].clientY - startY;
+
+        // If the swipe is mostly horizontal, prevent the page from "rubber banding"
+        if(Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 12){
+          e.preventDefault();
+        }
+      }, {passive:false});
+
+      slider.addEventListener("touchend", () => {
+        if(!tracking) return;
+        tracking = false;
+
+        const swipeThreshold = 45; // px
+        if(Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold){
+          if(deltaX < 0) nextSlide();  // swipe left
+          else prevSlide();            // swipe right
+        }
+        startAuto();
+      }, {passive:true});
+
       slider.addEventListener("mouseenter", stopAuto);
       slider.addEventListener("mouseleave", startAuto);
-      slider.addEventListener("touchstart", stopAuto, {passive:true});
-      slider.addEventListener("touchend", startAuto, {passive:true});
     }
 
-    // Init slider
     if(slides.length){
       setSlide(0);
       startAuto();
