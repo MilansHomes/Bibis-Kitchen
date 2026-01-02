@@ -8,7 +8,7 @@
 
   <style>
     :root{
-      --accent:#5F7D2C;                 /* your logo green */
+      --accent:#5F7D2C;                 /* logo green */
       --accentSoft: rgba(95,125,44,.22);
       --bg:#070a12;
       --bg2:#0b1020;
@@ -18,11 +18,9 @@
       --muted:#b9c2da;
       --border: rgba(255,255,255,.12);
       --shadow: 0 18px 50px rgba(0,0,0,.45);
-
       --ice: rgba(110,231,255,.18);
       --purple: rgba(167,139,250,.16);
       --gold: rgba(250,204,21,.14);
-
       --r:18px;
       --r2:14px;
     }
@@ -43,7 +41,7 @@
     a{color:inherit;text-decoration:none}
     a:hover{opacity:.92}
     .wrap{max-width:1120px;margin:0 auto;padding:18px}
-    section{scroll-margin-top:92px}
+    section{scroll-margin-top:120px}
 
     /* Sticky top nav */
     .topbar{
@@ -151,6 +149,7 @@
       color:var(--text);
       font-weight:950;
       transition: transform .12s ease, filter .12s ease, background .12s ease;
+      cursor:pointer;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn.primary{
@@ -175,12 +174,11 @@
     .heroInfo .big{color:var(--text);font-weight:950}
     .heroInfo .small{font-size:13px}
 
-    /* Two column sections */
+    /* Visit + Hours */
     .twoCol{display:grid;grid-template-columns: 1fr 1fr;gap:14px;align-items:stretch}
     .mapBox{overflow:hidden;border-radius:var(--r2);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
     iframe{width:100%;height:320px;border:0}
 
-    /* Hours */
     .hoursCard{
       border-radius:var(--r2);
       border:1px solid rgba(255,255,255,.12);
@@ -211,7 +209,90 @@
     .sIcon:hover{transform:translateY(-2px);border-color: rgba(95,125,44,.6);background: rgba(95,125,44,.12)}
     .sIcon svg{width:20px;height:20px;opacity:.92}
 
-    /* ORDER ONLINE page big buttons */
+    /* About section with slider on the right */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+      margin-top:14px;
+    }
+    .aboutText{
+      padding:18px;
+    }
+    .aboutSliderWrap{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .slider{
+      position:relative;
+      border-radius:var(--r2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      flex:1;
+      min-height: 260px;
+    }
+    .slide{
+      position:absolute; inset:0;
+      display:none;
+    }
+    .slide.active{display:block}
+    .slideBox{
+      width:100%;
+      height:100%;
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.75);
+      font-weight:950;
+      letter-spacing:.4px;
+      background:
+        radial-gradient(900px 500px at 25% 15%, rgba(95,125,44,.20), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    }
+    .slide img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .sliderControls{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+    }
+    .sliderBtn{
+      flex: 0 0 auto;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:950;
+    }
+    .sliderBtn:hover{transform:translateY(-1px)}
+    .dots{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      align-items:center;
+      flex:1;
+    }
+    .dotBtn{
+      width:10px;height:10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      cursor:pointer;
+    }
+    .dotBtn.active{
+      background: var(--accent);
+      border-color: rgba(0,0,0,.12);
+      box-shadow:0 0 0 4px rgba(95,125,44,.18);
+    }
+
+    /* ORDER ONLINE */
     .orderGrid{display:grid;grid-template-columns: 1fr;gap:12px;margin-top:12px}
     .orderBtn{
       display:flex;align-items:center;gap:14px;
@@ -249,7 +330,7 @@
       font-weight:1000;
     }
 
-    /* MENU page */
+    /* MENU */
     .category{margin-top:18px;padding-top:6px;border-top:1px solid rgba(255,255,255,.10)}
     .category:first-of-type{border-top:none;margin-top:6px}
     .catTitle{
@@ -267,11 +348,11 @@
       font-size: 13px;
     }
 
-    /* Sticky 4-tab menu bar (follows you while scrolling) */
+    /* Sticky 4-tab menu bar (one-line on mobile, scrolls sideways if needed) */
     .menuTabs{
       position: sticky;
       z-index: 30;
-      top: 72px; /* JS will set exact value = header height */
+      top: 72px; /* JS sets exact value */
       margin-top: 12px;
       padding: 10px;
       border-radius: 16px;
@@ -279,7 +360,7 @@
       background: rgba(7,10,18,.72);
       backdrop-filter: blur(12px);
       box-shadow: 0 16px 45px rgba(0,0,0,.35);
-      overflow-x: auto;           /* keeps ONE LINE on mobile */
+      overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
     .menuTabs::-webkit-scrollbar{height:6px}
@@ -288,9 +369,10 @@
     .tabRow{
       display:flex;
       gap:10px;
-      flex-wrap: nowrap;          /* no wrapping */
+      flex-wrap: nowrap;
       white-space: nowrap;
-      min-width: max-content;     /* keep in one line even if it needs scroll */
+      min-width: max-content;
+      justify-content:center;
     }
     .tabBtn{
       flex: 0 0 auto;
@@ -310,7 +392,12 @@
       background: rgba(95,125,44,.12);
     }
 
-    .menuGrid{display:grid;grid-template-columns: repeat(3, minmax(0, 1fr));gap:14px}
+    /* Desktop = 3 columns */
+    .menuGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
+    }
     .item{
       border-radius:var(--r2);
       border:1px solid rgba(255,255,255,.12);
@@ -363,9 +450,17 @@
       .heroInner{grid-template-columns:1fr}
       .twoCol{grid-template-columns:1fr}
       .contactGrid{grid-template-columns:1fr}
-      .menuGrid{grid-template-columns:1fr}
       .hero h1{font-size:36px}
       .hero{min-height:auto}
+
+      /* About grid stacks on phone */
+      .aboutGrid{grid-template-columns:1fr}
+
+      /* iPhone / mobile = 2 columns */
+      .menuGrid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .tabBtn{font-size:12.5px;padding:9px 11px}
     }
   </style>
@@ -416,13 +511,49 @@
         </div>
       </section>
 
-      <section class="card block" aria-label="About us">
-        <h2>About Us</h2>
-        <div class="accentLine" aria-hidden="true"></div>
-        <p class="muted" style="margin:0;">
-          At Bibi's Kitchen, we don't just serve food; we craft experiences that tell the story of India's rich culinary heritage.
-          Our journey began with a simple vision: to bring the vibrant flavors and authentic tastes of Indian fast food to discerning palates all around.
-        </p>
+      <!-- About + Slider -->
+      <section class="aboutGrid">
+        <div class="card aboutText" aria-label="About us">
+          <h2>About Us</h2>
+          <div class="accentLine" aria-hidden="true"></div>
+          <p class="muted" style="margin:0;">
+            At Bibi's Kitchen, we don't just serve food; we craft experiences that tell the story of India's rich culinary heritage.
+            Our journey began with a simple vision: to bring the vibrant flavors and authentic tastes of Indian fast food to discerning palates all around.
+          </p>
+          <p class="muted" style="margin:12px 0 0;font-size:13px;">
+            (You can swap these slider placeholders with real photos anytime.)
+          </p>
+        </div>
+
+        <div class="card aboutSliderWrap" aria-label="Photo slider">
+          <h2 style="margin:0;">Gallery</h2>
+          <div class="accentLine" aria-hidden="true"></div>
+
+          <div class="slider" id="aboutSlider">
+            <!-- SLIDE 1 -->
+            <div class="slide active">
+              <!-- Replace this placeholder with an actual image if you want:
+                   <img src="images/slide1.jpg" alt="BiBi's Kitchen food" /> -->
+              <div class="slideBox">Slide 1 (Add photo)</div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="slide">
+              <div class="slideBox">Slide 2 (Add photo)</div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="slide">
+              <div class="slideBox">Slide 3 (Add photo)</div>
+            </div>
+          </div>
+
+          <div class="sliderControls">
+            <button class="sliderBtn" type="button" id="prevSlide">◀ Prev</button>
+            <div class="dots" id="slideDots" aria-label="Slide dots"></div>
+            <button class="sliderBtn" type="button" id="nextSlide">Next ▶</button>
+          </div>
+        </div>
       </section>
 
       <section class="twoCol" aria-label="Visit and hours" style="margin-top:14px;">
@@ -580,33 +711,28 @@
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa Plate</h3><p class="price">$7.00</p></div><p class="desc">2 samosas with chutney</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa Chana</h3><p class="price">$8.99</p></div><p class="desc">Crushed samosa topped with chickpeas, yogurt & chutneys</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Kulcha Chole</h3><p class="price">$8.99</p></div><p class="desc">Grilled potatoes with a western flair</p></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chana</h3><p class="price">$8.99</p></div><p class="desc">Spiced chickpeas over crispy aloo tikki</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chat</h3><p class="price">$7.00</p></div><p class="desc">Aloo tikki topped with yogurt & chutneys</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Bhalla</h3><p class="price">$9.50</p></div><p class="desc">Soft lentil dumplings topped with yogurt</p></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Batata Puri</h3><p class="price">$8.50</p></div><p class="desc">Crispy puris with potato, yogurt & chutneys</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chat Papri</h3><p class="price">$7.75</p></div><p class="desc">Crispy wafers layered with potatoes, yogurt, chutneys & sev</p></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Golgappe</h3><p class="price">$8.50</p></div><p class="desc">Crispy puris with tangy flavored water</p></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Pakora</h3><p class="price">$8.50</p></div><p class="desc">Soft paneer dipped in spiced batter & deep-fried</p></div></article>
           </div>
 
           <div class="catTitle" style="margin-top:20px;font-size:16px;letter-spacing:1px;">MORE APPETIZERS</div>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Manchurian</h3><p class="price">$9.99</p></div><p class="desc">Fried potato wedges, corn & pickled cucumbers</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Momos</h3><p class="price">$9.99</p></div><p class="desc">Steamed dumplings filled with seasoned vegetables</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Spring Roll</h3><p class="price">$7.50</p></div><p class="desc">Crispy rolls with seasoned cabbage & veggies</p></div></article>
-
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Pav Bhaji</h3><p class="price">$10.99</p></div><p class="desc">Buttery vegetable mash with toasted pav buns</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Vada Pav</h3><p class="price">$10.99</p></div><p class="desc">Spicy potato fritter in bun with chutneys</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Fries</h3><p class="price">$6.50</p></div><p class="desc">Crispy fries with house masala blend</p></div></article>
-
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Shahi Paneer Fries</h3><p class="price">$8.50</p></div><p class="desc">Fries topped with creamy shahi paneer gravy</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Manchurian</h3><p class="price">$9.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Momos</h3><p class="price">$9.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Spring Roll</h3><p class="price">$7.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Pav Bhaji</h3><p class="price">$10.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Vada Pav</h3><p class="price">$10.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Fries</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Shahi Paneer Fries</h3><p class="price">$8.50</p></div></div></article>
           </div>
         </div>
 
-        <!-- LUNCH (includes burgers/sandwiches, pasta/rice, parantha, combos) -->
+        <!-- LUNCH -->
         <div class="category" id="cat-lunch">
           <div class="catTitle">LUNCH</div>
           <p class="catNote">Combos + Burgers & Sandwiches + Pasta & Rice + Parantha</p>
@@ -620,20 +746,20 @@
 
           <div class="catTitle" style="margin-top:20px;font-size:16px;letter-spacing:1px;">BURGERS & SANDWICHES</div>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Burger</h3><p class="price">$7.99</p></div><p class="desc">Veg patty with lettuce, onions & sauces</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Noodle Burger</h3><p class="price">$9.99</p></div><p class="desc">Burger filled with spiced stir-fried noodles</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Tikka Wrap</h3><p class="price">$8.99</p></div><p class="desc">Paneer tikka + veggies & chutney</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Sandwich</h3><p class="price">$7.99</p></div><p class="desc">Grilled sandwich with paneer filling</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bombay Sandwich</h3><p class="price">$7.99</p></div><p class="desc">Layered sandwich with chutney & masala</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Burger</h3><p class="price">$7.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Noodle Burger</h3><p class="price">$9.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Tikka Wrap</h3><p class="price">$8.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Sandwich</h3><p class="price">$7.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bombay Sandwich</h3><p class="price">$7.99</p></div></div></article>
           </div>
 
           <div class="catTitle" style="margin-top:20px;font-size:16px;letter-spacing:1px;">PASTA & RICE</div>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Creamy Pasta</h3><p class="price">$7.99</p></div><p class="desc">White sauce pasta with herbs & veggies</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Rose Pasta</h3><p class="price">$7.99</p></div><p class="desc">Tomato & cheese sauce pasta</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Noodles</h3><p class="price">$9.99</p></div><p class="desc">Stir-fried noodles with vegetables</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Maggi</h3><p class="price">$7.00</p></div><p class="desc">Spicy masala noodles</p></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Fried Rice</h3><p class="price">$10.25</p></div><p class="desc">Stir-fried rice with assorted veggies</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Creamy Pasta</h3><p class="price">$7.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Rose Pasta</h3><p class="price">$7.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Noodles</h3><p class="price">$9.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Maggi</h3><p class="price">$7.00</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Fried Rice</h3><p class="price">$10.25</p></div></div></article>
           </div>
 
           <div class="catTitle" style="margin-top:20px;font-size:16px;letter-spacing:1px;">PARANTHA</div>
@@ -656,7 +782,7 @@
           </div>
         </div>
 
-        <!-- DRINKS (hot + cold) -->
+        <!-- DRINKS -->
         <div class="category" id="cat-drinks">
           <div class="catTitle">DRINKS</div>
           <p class="catNote">Hot + Cold</p>
@@ -690,26 +816,22 @@
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">KitKat Shake</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Shake</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Oreo Shake</h3><p class="price">$6.50</p></div></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chocolate Shake</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Banana Shake</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Strawberry Shake</h3><p class="price">$6.50</p></div></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Vanilla Shake</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Cold Coffee</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Caramel Iced Coffee</h3><p class="price">$6.50</p></div></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Milk Badam</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Salted Lassi</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Sweet Lassi</h3><p class="price">$6.50</p></div></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Lassi</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mix Fruit Smoothie</h3><p class="price">$6.50</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Pineapple Smoothie</h3><p class="price">$6.50</p></div></div></article>
           </div>
         </div>
 
-        <!-- DESSERTS (includes ice cream) -->
+        <!-- DESSERTS -->
         <div class="category" id="cat-desserts">
           <div class="catTitle">DESSERTS</div>
           <p class="catNote">Includes Ice Cream</p>
@@ -719,7 +841,6 @@
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Gulab Jamun</h3><p class="price">$4.99</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Rasmalai</h3><p class="price">$4.99</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Rasmalai</h3><p class="price">$4.99</p></div></div></article>
-
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Cream Roll</h3><p class="price">$4.29</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Pastry</h3><p class="price">$4.99</p></div></div></article>
             <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Faluda Kulfi</h3><p class="price">$8.25</p></div></div></article>
@@ -735,7 +856,7 @@
         </div>
 
         <p class="muted" style="margin-top:14px;font-size:13px;">
-          To add photos later: replace “Add photo” with an <code>&lt;img class="thumbImg" src="..."&gt;</code>.
+          To add photos later: replace “Add photo” with an <code>&lt;img src="..." alt="..." /&gt;</code> inside each card.
         </p>
       </section>
 
@@ -759,19 +880,17 @@
       pages.forEach(p => pageEls[p].classList.toggle("active", p === page));
       navLinks.forEach(a => a.classList.toggle("active", a.dataset.page === page));
       window.scrollTo({top:0, behavior:"smooth"});
-      updateMenuTabsTop(); // keep sticky tabs positioned under header
+      updateMenuTabsTop();
     }
-
     function handleRoute(){
       const hash = (location.hash || "#home").replace("#","");
       setActivePage(hash);
     }
-
     window.addEventListener("hashchange", handleRoute);
     window.addEventListener("resize", () => updateMenuTabsTop());
     handleRoute();
 
-    // Put menu sticky tabs exactly under the main header (so it "follows" correctly)
+    // Menu sticky tabs positioned under header
     function updateMenuTabsTop(){
       const header = document.querySelector(".topbar");
       const tabs = document.getElementById("menuTabs");
@@ -780,14 +899,13 @@
     }
     updateMenuTabsTop();
 
-    // Smooth scroll to menu category sections from sticky menu tabs
+    // Smooth scroll helper (accounts for header + menuTabs if present)
     function scrollToSection(id){
       const el = document.getElementById(id);
       if(!el) return;
 
       const header = document.querySelector(".topbar");
       const tabs = document.getElementById("menuTabs");
-
       const offset = (header ? header.offsetHeight : 0) + (tabs ? tabs.offsetHeight : 0) + 18;
 
       const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
@@ -800,14 +918,74 @@
 
       const target = btn.getAttribute("data-jump");
 
-      // If user clicks category tabs while not on menu page, go to menu page first
       if(location.hash !== "#menu"){
         location.hash = "#menu";
-        setTimeout(() => scrollToSection(target), 250);
+        setTimeout(() => scrollToSection(target), 260);
       } else {
         scrollToSection(target);
       }
     });
+
+    // ===== About slider (Prev/Next + dots) =====
+    const slider = document.getElementById("aboutSlider");
+    const slides = slider ? Array.from(slider.querySelectorAll(".slide")) : [];
+    const prevBtn = document.getElementById("prevSlide");
+    const nextBtn = document.getElementById("nextSlide");
+    const dotsWrap = document.getElementById("slideDots");
+    let currentSlide = 0;
+
+    function renderDots(){
+      if(!dotsWrap) return;
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i) => {
+        const d = document.createElement("button");
+        d.className = "dotBtn" + (i === currentSlide ? " active" : "");
+        d.type = "button";
+        d.setAttribute("aria-label", "Go to slide " + (i+1));
+        d.addEventListener("click", () => setSlide(i));
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function setSlide(index){
+      if(!slides.length) return;
+      currentSlide = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
+      renderDots();
+    }
+
+    function nextSlide(){
+      setSlide(currentSlide + 1);
+    }
+    function prevSlide(){
+      setSlide(currentSlide - 1);
+    }
+
+    if(prevBtn) prevBtn.addEventListener("click", prevSlide);
+    if(nextBtn) nextBtn.addEventListener("click", nextSlide);
+
+    // Optional: auto-rotate every 5s (feel free to delete these 2 lines if you don't want it)
+    let autoTimer = null;
+    function startAuto(){
+      if(!slides.length) return;
+      autoTimer = setInterval(nextSlide, 5000);
+    }
+    function stopAuto(){
+      if(autoTimer) clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    if(slider){
+      slider.addEventListener("mouseenter", stopAuto);
+      slider.addEventListener("mouseleave", startAuto);
+      slider.addEventListener("touchstart", stopAuto, {passive:true});
+      slider.addEventListener("touchend", startAuto, {passive:true});
+    }
+
+    // Init slider
+    if(slides.length){
+      setSlide(0);
+      startAuto();
+    }
   </script>
 </body>
 </html>
