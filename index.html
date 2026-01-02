@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BiBi’s Kitchen | Vancouver</title>
-  <meta name="description" content="BiBi’s Kitchen in Vancouver — Eat Fresh Feel Fresh. Order online via Uber Eats, DoorDash, or SkipTheDishes." />
+  <meta name="description" content="BiBi’s Kitchen in Vancouver — eat fresh feel fresh. Order online via Uber Eats, DoorDash, or SkipTheDishes." />
 
   <style>
     :root{
@@ -19,7 +19,7 @@
       --border: rgba(255,255,255,.12);
       --shadow: 0 18px 50px rgba(0,0,0,.45);
 
-      /* extra subtle color pops */
+      /* subtle color pops */
       --ice: rgba(110,231,255,.18);
       --purple: rgba(167,139,250,.16);
       --gold: rgba(250,204,21,.14);
@@ -70,10 +70,6 @@
       overflow:hidden;
       flex:0 0 auto;
     }
-    /* Optional: replace BK with your real logo:
-       1) create assets/logo.png in your repo
-       2) uncomment the <img> below in the HTML where the BK is
-    */
     .logo span{font-weight:1000;letter-spacing:.7px}
 
     .navlinks{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -128,11 +124,6 @@
     .hero::before{
       content:"";
       position:absolute;inset:0;
-      /* Replace hero background with your image:
-         - add assets/hero.jpg
-         - change the background-image line to:
-         background-image: linear-gradient(...), url('assets/hero.jpg');
-      */
       background-image:
         linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.74)),
         radial-gradient(900px 500px at 25% 15%, rgba(95,125,44,.22), transparent 60%),
@@ -239,7 +230,6 @@
       flex:0 0 auto;
       overflow:hidden;
     }
-    /* Place real logos here later if you want (PNG/SVG). For now it's clean icon blocks. */
     .logoBox .mark{
       width:44px;height:44px;border-radius:14px;
       display:grid;place-items:center;
@@ -261,6 +251,27 @@
     }
 
     /* MENU page */
+    .jumpbar{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:12px
+    }
+    .jumpbtn{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight:900;
+      font-size:13px;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .jumpbtn:hover{
+      transform:translateY(-1px);
+      border-color: rgba(95,125,44,.6);
+      background: rgba(95,125,44,.12);
+    }
+
     .category{margin-top:18px;padding-top:6px;border-top:1px solid rgba(255,255,255,.10)}
     .category:first-of-type{border-top:none;margin-top:6px}
     .catTitle{
@@ -268,9 +279,16 @@
       font-weight:1000;
       letter-spacing:1.2px;
       color:rgba(95,125,44,.95);
-      margin:12px 0 14px;
+      margin:12px 0 6px;
       font-size:20px;
     }
+    .catNote{
+      text-align:center;
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
     .menuGrid{display:grid;grid-template-columns: repeat(3, minmax(0, 1fr));gap:14px}
     .item{
       border-radius:var(--r2);
@@ -338,9 +356,6 @@
     <div class="wrap navrow">
       <a class="brand" href="#home" aria-label="BiBi's Kitchen home">
         <div class="logo" aria-hidden="true">
-          <!-- Optional real logo:
-          <img src="assets/logo.png" alt="BiBi’s Kitchen logo" style="width:100%;height:100%;object-fit:cover;">
-          -->
           <span>BK</span>
         </div>
         <span>BiBi’s Kitchen</span>
@@ -378,7 +393,7 @@
             <p class="big">418 Terminal Avenue</p>
             <p>Vancouver, British Columbia V6A 0C1, Canada</p>
             <p class="small"><span class="muted">Phone:</span> <a href="tel:16045659898"><strong style="color:var(--text)">604-565-9898</strong></a></p>
-            <p class="small muted" style="margin-top:10px;">Tip: replace hero background with your food photo (assets/hero.jpg).</p>
+            <p class="small muted" style="margin-top:10px;">Tip: you can replace the hero background with a food photo later.</p>
           </aside>
         </div>
       </section>
@@ -515,7 +530,7 @@
         </div>
 
         <p class="muted" style="margin-top:14px;font-size:13px;">
-          Want the REAL official logos here? Upload the 3 logo files and I’ll wire them in perfectly.
+          If you want the actual official platform logos here, upload them and I’ll wire them in.
         </p>
       </section>
 
@@ -529,93 +544,198 @@
       <section class="card block">
         <h2>Menu</h2>
         <div class="accentLine" aria-hidden="true"></div>
-        <p class="muted" style="margin:0 0 10px;">
-          Menu layout matches your screenshots. Prices only show when they were shown in your screenshots.
+        <p class="muted" style="margin:0;">
+          Use the buttons to jump to a section.
         </p>
 
-        <!-- LUNCH -->
-        <div class="category">
+        <!-- Jump buttons -->
+        <div class="jumpbar" aria-label="Menu section shortcuts">
+          <button class="jumpbtn" type="button" data-jump="menu-chaat">Chaat Specials</button>
+          <button class="jumpbtn" type="button" data-jump="menu-apps">Appetizers</button>
+          <button class="jumpbtn" type="button" data-jump="menu-lunch">Lunch</button>
+          <button class="jumpbtn" type="button" data-jump="menu-burgers">Burgers & Sandwiches</button>
+          <button class="jumpbtn" type="button" data-jump="menu-pasta">Pasta & Rice</button>
+          <button class="jumpbtn" type="button" data-jump="menu-parantha">Parantha</button>
+          <button class="jumpbtn" type="button" data-jump="menu-hot">Hot Drinks</button>
+          <button class="jumpbtn" type="button" data-jump="menu-cold">Cold Drinks</button>
+          <button class="jumpbtn" type="button" data-jump="menu-desserts">Desserts</button>
+          <button class="jumpbtn" type="button" data-jump="menu-icecream">Ice Cream</button>
+        </div>
+
+        <!-- 1) CHAAT SPECIALS -->
+        <div class="category" id="menu-chaat">
+          <div class="catTitle">CHAAT SPECIALS</div>
+          <p class="catNote">Blank image slots (add photos later) + prices from your menu board.</p>
+          <div class="menuGrid">
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa Plate</h3><p class="price">$7.00</p></div><p class="desc">2 samosas with chutney</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa Chana</h3><p class="price">$8.99</p></div><p class="desc">Crushed samosa topped with chickpeas, yogurt & chutneys</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Kulcha Chole</h3><p class="price">$8.99</p></div><p class="desc">Grilled potatoes with a western flair</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chana</h3><p class="price">$8.99</p></div><p class="desc">Spiced chickpeas over crispy aloo tikki</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chat</h3><p class="price">$7.00</p></div><p class="desc">Aloo tikki topped with yogurt & chutneys</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Bhalla</h3><p class="price">$9.50</p></div><p class="desc">Soft lentil dumplings topped with yogurt</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Batata Puri</h3><p class="price">$8.50</p></div><p class="desc">Crispy puris with potato, yogurt & chutneys</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chat Papri</h3><p class="price">$7.75</p></div><p class="desc">Crispy wafers layered with potatoes, yogurt, chutneys & sev</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Golgappe</h3><p class="price">$8.50</p></div><p class="desc">Crispy puris with tangy flavored water</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Pakora</h3><p class="price">$8.50</p></div><p class="desc">Soft paneer dipped in spiced batter & deep-fried</p></div></article>
+          </div>
+        </div>
+
+        <!-- 2) APPETIZERS -->
+        <div class="category" id="menu-apps">
+          <div class="catTitle">APPETIZERS</div>
+          <div class="menuGrid">
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Manchurian</h3><p class="price">$9.99</p></div><p class="desc">Fried potato wedges, corn & pickled cucumbers</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Momos</h3><p class="price">$9.99</p></div><p class="desc">Steamed dumplings filled with seasoned vegetables</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Spring Roll</h3><p class="price">$7.50</p></div><p class="desc">Crispy rolls with seasoned cabbage & veggies</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Pav Bhaji</h3><p class="price">$10.99</p></div><p class="desc">Buttery vegetable mash served with toasted pav buns</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Vada Pav</h3><p class="price">$10.99</p></div><p class="desc">Spicy potato fritter in a bun with chutneys</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Fries</h3><p class="price">$6.50</p></div><p class="desc">Crispy fries dusted with house masala blend</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Shahi Paneer Fries</h3><p class="price">$8.50</p></div><p class="desc">Crispy fries topped with rich, creamy shahi paneer gravy</p></div></article>
+          </div>
+        </div>
+
+        <!-- 3) LUNCH (COMBOS) -->
+        <div class="category" id="menu-lunch">
           <div class="catTitle">LUNCH</div>
           <div class="menuGrid">
-            <article class="item">
-              <div class="thumb">
-                <!-- Replace with real image:
-                <img class="thumbImg" src="assets/menu/lunch/bibis-home-meal.jpg" alt="Bibi’s Home Meal">
-                -->
-                Add photo
-              </div>
-              <div class="itemBody">
-                <div class="nameRow"><h3 class="itemName">Bibi’s Home Meal</h3></div>
-                <p class="desc">2 curry, rice, naan bread, side salad</p>
-              </div>
-            </article>
-
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Tikka Wrap</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Kulcha Chole</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa With Chana</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki With Chana</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Biryani</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Momos</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Manchurian</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Hakka Noodles</h3></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Lunch Special</h3><p class="price">$16.99</p></div><p class="desc">2 curries, rice, naan, side salad & butter</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Home Meal Combo</h3><p class="price">$22.99</p></div><p class="desc">2 curries, rice, naan, side salad & butter, dessert + drink (can or water)</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veg Rice Combo</h3><p class="price">$8.00</p></div><p class="desc">Steamed rice served with your choice of dal, sabji, or shahi paneer</p></div></article>
           </div>
         </div>
 
-        <!-- APPETIZER -->
-        <div class="category">
-          <div class="catTitle">APPETIZER</div>
+        <!-- 3A) Lunch includes Burgers & Sandwiches -->
+        <div class="category" id="menu-burgers">
+          <div class="catTitle">BURGERS & SANDWICHES</div>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Samosa</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Patty</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bhel Puri</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Spring Roll</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Tikki Chaat</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chat Papri</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Bhalle</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Dahi Batata Puri</h3></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Golgappe</h3></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Burger</h3><p class="price">$7.99</p></div><p class="desc">Crunchy veggie patty with lettuce, onions & sauces</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Noodle Burger</h3><p class="price">$9.99</p></div><p class="desc">Fusion burger filled with spiced stir-fried noodles</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Tikka Wrap</h3><p class="price">$8.99</p></div><p class="desc">Paneer tikka, veggies & chutney wrapped in soft flatbread</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Sandwich</h3><p class="price">$7.99</p></div><p class="desc">Grilled sandwich with flavorful paneer filling</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bombay Sandwich</h3><p class="price">$7.99</p></div><p class="desc">Mumbai-style layered sandwich with veggies, chutney & masala</p></div></article>
           </div>
         </div>
 
-        <!-- PARANTHA -->
-        <div class="category">
+        <!-- 3B) Lunch includes Pasta & Rice -->
+        <div class="category" id="menu-pasta">
+          <div class="catTitle">PASTA & RICE</div>
+          <div class="menuGrid">
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Creamy Pasta</h3><p class="price">$7.99</p></div><p class="desc">Rich white sauce pasta with herbs & veggies</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Rose Pasta</h3><p class="price">$7.99</p></div><p class="desc">Creamy tomato & cheese sauce tossed with pasta</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Noodles</h3><p class="price">$9.99</p></div><p class="desc">Stir-fried noodles with fresh vegetables</p></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Masala Maggi</h3><p class="price">$7.00</p></div><p class="desc">Classic Indian-style spicy masala noodles</p></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Fried Rice</h3><p class="price">$10.25</p></div><p class="desc">Golden stir-fried rice with assorted veggies & mild spices</p></div></article>
+          </div>
+        </div>
+
+        <!-- 4) PARANTHA -->
+        <div class="category" id="menu-parantha">
           <div class="catTitle">PARANTHA</div>
+          <p class="catNote">Freshly made & served hot with butter.</p>
           <div class="menuGrid">
             <article class="item">
               <div class="thumb">Add photo</div>
               <div class="itemBody">
-                <div class="nameRow"><h3 class="itemName">Parantha</h3><p class="price">8.5</p></div>
-                <p class="desc">Potato, Cauliflower, Paneer, Mooli, Methi</p>
+                <div class="nameRow"><h3 class="itemName">Parantha (Aloo / Gobi / Paneer / Mooli / Methi)</h3><p class="price">$7.75</p></div>
+                <p class="desc">Choose your filling</p>
+              </div>
+            </article>
+
+            <article class="item">
+              <div class="thumb">Add photo</div>
+              <div class="itemBody">
+                <div class="nameRow"><h3 class="itemName">Paratha Meal</h3><p class="price">$16.95</p></div>
+                <p class="desc">2 paratha with butter, yogurt & pickle</p>
               </div>
             </article>
           </div>
         </div>
 
-        <!-- BURGERS -->
-        <div class="category">
-          <div class="catTitle">BURGERS</div>
+        <!-- 5) DRINKS (HOT + COLD) -->
+        <div class="category" id="menu-hot">
+          <div class="catTitle">DRINKS — HOT</div>
+          <p class="catNote">Group pricing from your menu: <strong style="color:var(--text)">S $3.15 · M $4.50 · L $5.15</strong></p>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Burger</h3><p class="price">11</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Noodle Burger</h3><p class="price">12</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Grilled Onion Burger</h3><p class="price">12</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Salad Burger</h3><p class="price">12</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Beyond Meat Burger</h3></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Indian Masala Chai</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Kashmiri Chai</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Indian Steamed Coffee</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Cappuccino Coffee</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Original Coffee</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Original Decaf Coffee</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Americano Coffee</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chai Tea Latte</h3><p class="price"></p></div></div></article>
+          </div>
+
+          <p class="catNote" style="margin-top:14px;">Second hot pricing group: <strong style="color:var(--text)">S $2.15 · M $3.13 · L $4.75</strong></p>
+          <div class="menuGrid">
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">French Vanilla</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Hot Chocolate</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Earl Grey</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Orange Pekoe</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Green Tea</h3><p class="price"></p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Steamed Milk</h3><p class="price"></p></div></div></article>
           </div>
         </div>
 
-        <!-- SANDWICH -->
-        <div class="category">
-          <div class="catTitle">SANDWICH</div>
+        <div class="category" id="menu-cold">
+          <div class="catTitle">DRINKS — COLD</div>
+          <p class="catNote">From your menu: <strong style="color:var(--text)">M $6.50</strong></p>
           <div class="menuGrid">
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Paneer Sandwich</h3><p class="price">8</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Bombay Sandwich</h3><p class="price">8</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Veggie Sandwich</h3><p class="price">4.5</p></div></div></article>
-            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Grilled Cheese Sandwich</h3><p class="price">4.5</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">KitKat Shake</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Shake</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Oreo Shake</h3><p class="price">$6.50</p></div></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Chocolate Shake</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Banana Shake</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Strawberry Shake</h3><p class="price">$6.50</p></div></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Vanilla Shake</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Cold Coffee</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Caramel Iced Coffee</h3><p class="price">$6.50</p></div></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Milk Badam</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Salted Lassi</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Sweet Lassi</h3><p class="price">$6.50</p></div></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Lassi</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mix Fruit Smoothie</h3><p class="price">$6.50</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Pineapple Smoothie</h3><p class="price">$6.50</p></div></div></article>
+          </div>
+        </div>
+
+        <!-- 6) DESSERTS (includes ICE CREAM) -->
+        <div class="category" id="menu-desserts">
+          <div class="catTitle">DESSERTS</div>
+          <div class="menuGrid">
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Gulab Jamun</h3><p class="price">$4.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Rasmalai</h3><p class="price">$4.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Mango Rasmalai</h3><p class="price">$4.99</p></div></div></article>
+
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Cream Roll</h3><p class="price">$4.29</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Pastry</h3><p class="price">$4.99</p></div></div></article>
+            <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">Faluda Kulfi</h3><p class="price">$8.25</p></div></div></article>
+          </div>
+
+          <div class="category" id="menu-icecream" style="border-top:none;margin-top:10px;padding-top:0;">
+            <div class="catTitle">ICE CREAM</div>
+            <p class="catNote">Flavors: Mango, Vanilla, Strawberry, Chocolate, Matka</p>
+            <div class="menuGrid">
+              <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">1 Scoop</h3><p class="price">$2.49</p></div></div></article>
+              <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">2 Scoops</h3><p class="price">$3.79</p></div></div></article>
+              <article class="item"><div class="thumb">Add photo</div><div class="itemBody"><div class="nameRow"><h3 class="itemName">3 Scoops</h3><p class="price">$4.59</p></div></div></article>
+            </div>
           </div>
         </div>
 
         <p class="muted" style="margin-top:14px;font-size:13px;">
-          To add photos: create <strong>assets/menu/</strong> and replace “Add photo” with an <code>&lt;img class="thumbImg"&gt;</code>.
+          To add photos later: replace “Add photo” with an <code>&lt;img class="thumbImg" src="..."&gt;</code>.
         </p>
       </section>
 
@@ -636,14 +756,8 @@
 
     function setActivePage(name){
       const page = pages.includes(name) ? name : "home";
-
-      // show/hide pages
       pages.forEach(p => pageEls[p].classList.toggle("active", p === page));
-
-      // nav highlight
       navLinks.forEach(a => a.classList.toggle("active", a.dataset.page === page));
-
-      // scroll to top on page change (feels like a real new page)
       window.scrollTo({top:0, behavior:"smooth"});
     }
 
@@ -654,6 +768,32 @@
 
     window.addEventListener("hashchange", handleRoute);
     handleRoute();
+
+    // Menu jump buttons (scroll to section)
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+
+      // account for sticky header
+      const header = document.querySelector(".topbar");
+      const offset = (header ? header.offsetHeight : 0) + 16;
+
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-jump]");
+      if(!btn) return;
+
+      // ensure we are on menu page
+      if(location.hash !== "#menu"){
+        location.hash = "#menu";
+        setTimeout(() => scrollToSection(btn.getAttribute("data-jump")), 250);
+      } else {
+        scrollToSection(btn.getAttribute("data-jump"));
+      }
+    });
   </script>
 </body>
 </html>
